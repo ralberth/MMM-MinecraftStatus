@@ -1,0 +1,17 @@
+{
+  "name": "MMM-MinecraftStatus",
+  "version": "1.0.0",
+  "description": "MagicMirror module for Minecraft Status",
+  "license": "MIT",
+  "author": "Rich Alberth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ralberth/MMM-MinecraftStatus"
+  },
+  "dependencies": {
+    "minecraft-ping": "1.0.0"
+  },
+  "devDependencies": {
+    "electron-rebuild": "^1.8.2"
+  }
+}
