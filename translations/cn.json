@@ -1,5 +1,6 @@
 {
   "players": "玩家",
   "latency": "潜伏",
-  "error": "错误"
+  "error": "错误",
+  "no_audio_support": "没有音频支持"
 }

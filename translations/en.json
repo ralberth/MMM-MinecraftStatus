@@ -1,5 +1,6 @@
 {
   "players": "players",
   "latency": "ms latency",
-  "error": "Error"
+  "error": "Error",
+  "no_audio_support": "No audio support"
 }

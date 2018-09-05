@@ -65,6 +65,8 @@ var config = {
 | `hostname` | '`localhost`' | DNS hostname of the Minecraft server to monitor. |
 | `port` | `12345` | TCP port the Minecraft server is listening on. |
 | `intervalSeconds` | `30` | How often the MagicMirror server should try to ping the Minecraft Server, in seconds. |
+| `alertSoundWhenPingFails` | `null` | Name of audio file under `modules/MMM-MinecraftStatus/public/sounds` to play when a ping fails to return valid results, such as if the server is offline, network problems, or host down.  Null means don't play a sound. |
+| `alertSoundOnFirstPlayer` | `null` | Name of audio file under `modules/MMM-MinecraftStatus/public/sounds` to play when the server has no players and the most recent ping returned a non-zero value for the number of players.  Used for an idle server to tell you when it's being used.  Null means don't play a sound. |
 
 
 ## Published Messages
@@ -144,12 +146,41 @@ The translations were done with Google Translate.  If you are a native speaker a
 1. There is no backoff/retry logic with the Minecraft server: if it fails, it reports failure and waits the number of `intervalSeconds` before trying again.  This can paint an unduly bad picture for at most `intervalSeconds` seconds before it tries again, even if the server recovered quickly.
 
 
+## Attributions
+
+### Software
+
+This module is a wrapper around the Node.js module `node-minecraft-ping` available at [www.npmjs.com/package/minecraft-ping](https://www.npmjs.com/package/minecraft-ping).  It was written by GitHub user [deathcap](https://github.com/deathcap) and available in GitHub at [deathcap/node-minecraft-ping](https://github.com/deathcap/node-minecraft-ping).
+
+This is a work by another person covered by the MIT license available [here](https://github.com/deathcap/node-minecraft-ping/blob/master/LICENSE).
+
+
+### Sounds
+
+The notification sounds in this module were acquired from [Freesound.org](https://freesound.org/) and are covered under the Creative Commons attribution license v3.0.  See [creativecommons.org/licenses](https://creativecommons.org/licenses/by/3.0/) for details on this and what this means for you.  Below are the attributions for each sound file under the `MMM-MinecraftStatus/public/sounds/` folder with any special notes.
+
+These sounds are works by other people, and do not imply or include any warranties.
+
+| **Filename** | **Author** | **Changes Made for MinecraftStatus** |
+| --- | --- | --- |
+| [alarm-1.mp3](https://freesound.org/people/jobro/sounds/244113/) | [jobro](https://freesound.org/people/jobro) | Converted from ogg to mp3 format |
+| [alert-sound.mp3](https://freesound.org/people/philitup321/sounds/204369/) | [philitup321](https://freesound.org/people/philitup321) | Converted from ogg to mp3 format |
+| [complete-chime.mp3](https://freesound.org/people/FoolBoyMedia/sounds/352661/) | [FoolBoyMedia] (https://freesound.org/people/FoolBoyMedia) | |
+| [doorbell-notification.mp3](https://freesound.org/people/TheBuilder15/sounds/415763/) | [TheBuilder15](https://freesound.org/people/TheBuilder15) | Converted from wav to mp3 format |
+| [level-up.mp3](https://freesound.org/people/rhodesmas/sounds/320655/) | [rhodesmas](https://freesound.org/people/rhodesmas) | Converted from wav to mp3 format |
+| [notification-2.mp3](https://freesound.org/people/ebcrosby/sounds/332651/) | [ebcrosby](https://freesound.org/people/ebcrosby) | Converted from wav to mp3 format |
+| [notification-bumptious.mp3](https://freesound.org/people/mickleness/sounds/276609/) | [mickleness](https://freesound.org/people/mickleness) | Converted from wav to mp3 format |
+| [notification-chime.mp3](https://freesound.org/people/hykenfreak/sounds/202029/) | [hykenfreak](https://freesound.org/people/TheBuilder15/) | Converted from wav to mp3 format |
+| [piano-notification-4.mp3](https://freesound.org/people/FoolBoyMedia/sounds/352650/) | [FoolBoyMedia](https://freesound.org/people/FoolBoyMedia) | |
+| [quito-mariscal-sucre-old.mp3](https://freesound.org/people/milton./sounds/81086/) | [milton.](https://freesound.org/people/milton.) | Converted from wav to mp3 format |
+| [signal-ring-1.mp3](https://freesound.org/people/Vendarro/sounds/399315/) | [Vendarro](https://freesound.org/people/Vendarro) | Converted from wav to mp3 format |
+| [ui-confirmation-alert-b4.mp3](https://freesound.org/people/InspectorJ/sounds/403014/) | [InspectorJ](https://freesound.org/people/InspectorJ) | Converted from wav to mp3 format |
+
 
 ## TO DO
 
 Other ideas and things I'd like to build in eventually.  Feel free to comment and suggest others.
 
-* Make an alert SOUND when goes from 0 to non-zero
 * Send an email or TXT when goes from 0 to non-zero
 * Add additional notification messages so other browser modules can react
 * Accept other published messages so other modules can control this module

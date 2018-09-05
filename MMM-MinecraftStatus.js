@@ -14,8 +14,18 @@ Module.register("MMM-MinecraftStatus", {
         banner: "Minecraft Server",
         hostname: "localhost",
         port: 12345,
-        intervalSeconds: 30
+        intervalSeconds: 30,
+        alertSoundWhenPingFails: null,
+        alertSoundOnFirstPlayer: null
     },
+
+
+    /*
+     * Remembers the number of players the server last sent back on the previous ping call.
+     * Needed below to tell when we cross the threshold from zero players to more than zero
+     * players: need to play the alert sound if configured.
+     */
+    lastPingNumPlayers: 0,
 
 
     getStyles: function() {
@@ -54,6 +64,15 @@ Module.register("MMM-MinecraftStatus", {
     getDom: function() {
         var  topDiv = this.createEle(null,  "div", "minecraftStatus"); // top level that holds everything
         this.createEle(topDiv, "div", "title", this.config.banner);
+
+        if (this.config.alertSoundWhenPingFails) {
+            this.audioPlayerPingFailed = this.createAudioPlayer(topDiv, this.config.alertSoundWhenPingFails);
+        }
+
+        if (this.config.alertSoundOnFirstPlayer) {
+            this.audioPlayerFirstPlayer = this.createAudioPlayer(topDiv, this.config.alertSoundOnFirstPlayer);
+        }
+
         var table = this.createEle(topDiv, "table");
 
         // successTbody holds the number of active players and latency to the server
@@ -67,6 +86,14 @@ Module.register("MMM-MinecraftStatus", {
         this.errorText.colSpan = 2;
 
         return topDiv;
+    },
+
+
+    createAudioPlayer: function(parent, audioUri) {
+        return this.createEle(parent, "audio", null,
+                       '<source type="audio/mpeg" src="/modules/MMM-MinecraftStatus/public/sounds/' + audioUri + '"/>' +
+                       '(' + this.translate("no_audio_support") + ')' +
+                       '</audio>');
     },
 
 
@@ -184,21 +211,34 @@ Module.register("MMM-MinecraftStatus", {
         if (payload.identifier === this.identifier) {
             switch(notification) {
                 case "MINECRAFT_UPDATE":
-                    this.playersDiv.innerHTML = payload.players;
+                    var currPlayers = parseInt(payload.players); // just being safe
+
+                    this.playersDiv.innerHTML = currPlayers;
                     this.latencyDiv.innerHTML = payload.latency;
                     this.successTbody.style.display = "block";
                     this.errorTbody.style.display = "none";
+
+                    if (this.audioPlayerFirstPlayer && this.lastPingNumPlayers == 0 && currPlayers > 0) {
+                        this.audioPlayerFirstPlayer.play();
+                    }
+
+                    this.lastPingNumPlayers = currPlayers;
                     break;
 
                 case "MINECRAFT_ERROR":
                     this.errorText.innerHTML = payload.message;
                     this.successTbody.style.display = "none";
                     this.errorTbody.style.display = "block";
+
                     this.sendNotification("SHOW_ALERT", { // picked-up by default module "alert"
                         type: "notification",
                         title: this.config.banner,
                         message: payload.message
                     });
+
+                    if (this.audioPlayerPingFailed) {
+                        this.audioPlayerPingFailed.play();
+                    }
                     break;
             }
         }

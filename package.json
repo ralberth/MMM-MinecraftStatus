@@ -1,17 +1,36 @@
 {
-  "name": "MMM-MinecraftStatus",
-  "version": "1.0.0",
-  "description": "MagicMirror module for Minecraft Status",
-  "license": "MIT",
-  "author": "Rich Alberth",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/ralberth/MMM-MinecraftStatus"
-  },
-  "dependencies": {
-    "minecraft-ping": "1.0.0"
-  },
-  "devDependencies": {
-    "electron-rebuild": "^1.8.2"
-  }
+    "name": "MMM-MinecraftStatus",
+    "version": "1.0.0",
+    "description": "MagicMirror module for Minecraft Status",
+    "license": "MIT",
+    "main": "MMM-MinecraftStatus.js",
+    "scripts": {
+        "test": "./node_modules/grunt/bin/grunt"
+    },
+    "author": "Rich Alberth",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ralberth/MMM-MinecraftStatus"
+    },
+    "keywords": [
+        "MagicMirror",
+        "module",
+        "Minecraft"
+    ],
+    "dependencies": {
+        "minecraft-ping": "1.0.0",
+        "npm": "^6.4.1"
+    },
+    "devDependencies": {
+        "grunt": "latest",
+        "grunt-eslint": "latest",
+        "grunt-jsonlint": "latest",
+        "grunt-markdownlint": "^1.0.13",
+        "grunt-stylelint": "latest",
+        "grunt-yamllint": "^0.3.0",
+        "stylelint": "^7.10.1",
+        "stylelint-config-standard": "latest",
+        "time-grunt": "latest",
+        "electron-rebuild": "^1.8.2"
+    }
 }
