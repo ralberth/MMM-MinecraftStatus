@@ -1,4 +1,5 @@
 {
   "players": "選手",
-  "latency": "レイテンシ"
+  "latency": "レイテンシ",
+  "error": "エラー"
 }

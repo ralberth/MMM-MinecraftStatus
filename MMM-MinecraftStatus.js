@@ -47,14 +47,25 @@ Module.register("MMM-MinecraftStatus", {
      * This creates "this.playersDiv" and "this.latencyDiv" for use below in function
      * socketNotificationReceived that overwrites their HTML with whatever the server
      * (node_helper.js) sends back from Minecraft.
+     *
+     * The rest of the code in this module makes sure exactly 1 of successDiv and errorDiv
+     * is "visibility: hidden" and the other is "visibility: visible".
      */
     getDom: function() {
-        var  topDiv = this.createEle(null,  "div", "minecraftStatus");
+        var  topDiv = this.createEle(null,  "div", "minecraftStatus"); // top level that holds everything
         this.createEle(topDiv, "div", "title", this.config.banner);
         var table = this.createEle(topDiv, "table");
-        var tbody = this.createEle(table, "tbody");
-        this.playersDiv = this.createMetricPanel(tbody, "user",    this.translate("players"));
-        this.latencyDiv = this.createMetricPanel(tbody, "clock-o", this.translate("latency"));
+
+        // successTbody holds the number of active players and latency to the server
+        this.successTbody = this.createEle(table, "tbody", "successSection");
+        this.playersDiv = this.createMetricPanel(this.successTbody, "user",    this.translate("players"));
+        this.latencyDiv = this.createMetricPanel(this.successTbody, "clock-o", this.translate("latency"));
+
+        // errorTbody holds the reason why we can't ping the server
+        this.errorTbody = this.createEle(table, "tbody", "errorSection");
+        this.errorText = this.createErrorSection(this.errorTbody);
+        this.errorText.colSpan = 2;
+
         return topDiv;
     },
 
@@ -71,6 +82,16 @@ Module.register("MMM-MinecraftStatus", {
         var value = this.createEle(row, "td", "value", "?");
         this.createEle(row, "td", "label", label);
         return value;
+    },
+
+
+    createErrorSection: function(parent) {
+        var tr1 = this.createEle(parent, "tr");
+        this.createEle(tr1, "td", "iconbox",
+                       "<i class='fa fa-exclamation-triangle fa-fw'></i>");
+        this.createEle(tr1, "td", "errorLabel", this.translate("error"));
+        var tr2 = this.createEle(parent, "tr");
+        return this.createEle(tr2, "td", "errorText");
     },
 
 
@@ -165,11 +186,14 @@ Module.register("MMM-MinecraftStatus", {
                 case "MINECRAFT_UPDATE":
                     this.playersDiv.innerHTML = payload.players;
                     this.latencyDiv.innerHTML = payload.latency;
+                    this.successTbody.style.display = "block";
+                    this.errorTbody.style.display = "none";
                     break;
 
                 case "MINECRAFT_ERROR":
-                    this.playersDiv.innerHTML = "!";
-                    this.latencyDiv.innerHTML = "!";
+                    this.errorText.innerHTML = payload.message;
+                    this.successTbody.style.display = "none";
+                    this.errorTbody.style.display = "block";
                     this.sendNotification("SHOW_ALERT", { // picked-up by default module "alert"
                         type: "notification",
                         title: this.config.banner,
@@ -179,6 +203,7 @@ Module.register("MMM-MinecraftStatus", {
             }
         }
     },
+
 
 
     /*

@@ -1,4 +1,5 @@
 {
   "players": "spieler",
-  "latency": "ms latenz"
+  "latency": "ms latenz",
+  "error", "Error"
 }

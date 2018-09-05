@@ -26,6 +26,18 @@ cd ../..
 This module needs the `npm install` to pick up it's dependencies, including the [minecraft-ping](https://www.npmjs.com/package/minecraft-ping) module that does all the real networking in here.
 
 
+## Upgrade
+
+If you already have a version of MMM-MinecraftStatus, run the following to pick up new code changes and install necessary dependencies:
+
+```shell
+cd MMM-MinecraftStatus
+git pull
+npm install
+cd ..
+```
+
+
 ## Configuration
 
 Edit your `config/config.js` file and add a new object to the `modules` array like any other module:
@@ -73,9 +85,6 @@ Attributes of the published object:
 * `message`: string description of the problem, taken from the minecraft-ping library mentioned above.
 
 
-Example message showing the format of a possible `message`
-
-
 ## Styling and HTML
 
 Sample of the generated HTML from a browser, so you can restyle anything you like:
@@ -84,20 +93,25 @@ Sample of the generated HTML from a browser, so you can restyle anything you lik
 <div class="minecraftStatus">
    <div class="title">Willowlands</div>
    <table>
-      <tbody>
+      <tbody class="successSection">
          <tr>
-            <td class="iconbox">
-               <i class="fa fa-user fa-fw"></i>
-            </td>
+            <td class="iconbox"><i class="fa fa-user fa-fw"></i></td>
             <td class="value">0</td>
             <td class="label">players</td>
          </tr>
          <tr>
-            <td class="iconbox">
-               <i class="fa fa-clock-o fa-fw"></i>
-            </td>
-            <td class="value">39</td>
+            <td class="iconbox"><i class="fa fa-clock-o fa-fw"></i></td>
+            <td class="value">9</td>
             <td class="label">ms latency</td>
+         </tr>
+      </tbody>
+      <tbody class="errorSection">
+         <tr>
+            <td class="iconbox"><i class="fa fa-exclamation-triangle fa-fw"></i></td>
+            <td class="errorLabel">Error</td>
+         </tr>
+         <tr>
+            <td class="errorText" colspan="2">blah blah blah</td>
          </tr>
       </tbody>
    </table>
@@ -118,7 +132,7 @@ MMM-MinecraftStatus is available in the following languages:
 * Simplified Japanese
 * Russian
 
-The translations were done with Google Translate.  If you are a native speaker and have a better tranlsation, please post a pull request!  I'd love to improve on what defaults I could find!
+The translations were done with Google Translate.  If you are a native speaker and have a better translation, please post a pull request!  I'd love to improve on what defaults I could find.
 
 
 ## Known Bugs
@@ -142,6 +156,4 @@ Other ideas and things I'd like to build in eventually.  Feel free to comment an
 * Automate trying different pingTypes, then keep the one that works
 * Config items to control styling
 * MUCH faster timeouts!  (mc socket in current library can't do this, switch libs?
-* When timeout, show appropriate alert message
-* Display last error message in new <DIV> instead of metrics
 * Show logged-in users

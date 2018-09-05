@@ -6,6 +6,13 @@
  */
 
 /*
+ * Set a max so error messages will word-wrap.
+ */
+.minecraftStatus {
+    max-width: 370px;
+}
+
+/*
  * Human readable name with the green & brown background image behind it:
  * URL reference should probably be relative, but this works as of now.
  * Padding makes it look like it has the same border all the way around.
@@ -44,7 +51,7 @@
     color: white;
 }
 
-.minecraftStatus td.label {
+.minecraftStatus .successSection td.label {
     vertical-align: bottom;
     padding-left: 4px;
     text-align: left;
@@ -57,7 +64,7 @@
 /*
  * An Iconbox is the <TD> that holds the FontSwesome images.
  */
-.minecraftStatus .iconbox {
+.minecraftStatus .successSection .iconbox {
     background-color: #4875B4;
 }
 
@@ -67,4 +74,35 @@
  */
 .minecraftStatus .iconbox i {
     color: #E0E0E0;
+}
+
+/*
+ * Start out not displaying either part of the widget (other than the name).
+ * The code in MMM-MinecraftStatus.js changes this based on the return from
+ * the helper.
+ */
+.minecraftStatus tbody {
+    display: none;
+}
+
+.minecraftStatus .errorSection .iconbox {
+    background-color: #C00000;
+    width: 10%;
+}
+
+.minecraftStatus .errorSection .errorLabel {
+    color: #C00000;
+    text-align: left;
+    vertical-align: middle;
+    width: 90%;
+    padding-left: 12px;
+}
+
+.minecraftStatus .errorSection .errorText {
+    text-align: left;
+    vertical-align: top;
+    font-size: medium;
+    word-wrap: break-word;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }

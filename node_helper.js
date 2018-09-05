@@ -43,8 +43,10 @@ module.exports = NodeHelper.create({
             var helper = this;
             mp.ping_fe01(arg, function(err, resp) {
                 if (err) {
-                    err.identifier = payload.identifier;
-                    helper.sendSocketNotification("MINECRAFT_ERROR", err);
+                    helper.sendSocketNotification("MINECRAFT_ERROR", {
+                        identifier: payload.identifier,
+                        message: helper.minecraftError2text(err)
+                    });
                 } else {
                     var timeSec = (new Date() - start_time);
                     var playerCount = resp.numPlayers ? resp.numPlayers : resp.playersOnline;
@@ -55,6 +57,33 @@ module.exports = NodeHelper.create({
                     });
                 }
             });
+        }
+    },
+
+
+
+    /*
+     * The server payload passed here is expected to be an instance of Error class.
+     * Most subclasses have an errno property.  If it's there and we recognize it, give the user
+     * a nice message.  If not, or there is no errno property, bail-out and use the message prop.
+     *
+     * Examples of what can come back from the server:
+     * Timeout:           { "errno": "ETIMEDOUT",    "address": "173.79.111.20" ... }
+     * DNS lookup failed: { "errno": "ENOTFOUND",    "message": "getaddrinfo ENOTFOUND myhost..." ... }
+     * Wrong port num:    { "errno": "ECONNREFUSED", "address": "127.0.0.1", "port": 12345, ... }
+     */
+    minecraftError2text: function(payload) {
+        switch(payload.errno) {
+            case 'ETIMEDOUT':    return "Timed-out contacting Minecraft server";
+            case 'ENOTFOUND':    return "Host " + payload.address + " was not found";
+            case 'ECONNREFUSED': return "Connection refused from " + payload.address + ":" + payload.port;
+            case 'ECONNRESET':   return "Minecraft server closed the connection";
+            case 'EHOSTUNREACH': return payload.address + " is unreachable";
+            case 'ENETUNREACH':  return "Network between here and " + payload.address + " is unreachable";
+
+            default:
+                // not a known type, grab generic message from the Error object
+                return payload.message;
         }
     }
 });
