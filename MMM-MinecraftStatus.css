@@ -28,6 +28,7 @@
 .minecraftStatus table {
   border-collapse: separate;
   border-spacing: 0 8px;
+  width: 100%;
 }
 
 .minecraftStatus tr {
@@ -46,6 +47,7 @@
   padding-right: 4px;
   text-align: right;
   color: white;
+  width: 5%;  /* hint to make this as thin as it can */
 }
 
 .minecraftStatus .successSection td.label {
@@ -56,6 +58,11 @@
   line-height: normal;
   font-size: small;
   font-variant: small-caps;
+  width: 90%;
+}
+
+.minecraftStatus .iconbox {
+  width: 5%;  /* hint to make this as thin as it can */
 }
 
 /*
@@ -84,7 +91,6 @@
 
 .minecraftStatus .errorSection .iconbox {
   background-color: #c00000;
-  width: 10%;
 }
 
 .minecraftStatus .errorSection .errorLabel {

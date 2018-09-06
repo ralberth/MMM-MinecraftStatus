@@ -106,7 +106,7 @@ Module.register("MMM-MinecraftStatus", {
             "<i class='fa fa-" + fontAwesomeName + " fa-fw'></i>");
 
         var value = this.createEle(row, "td", "value", "?");
-        this.createEle(row, "td", "label", label);
+        this.createEle(row, "td", "label", label.replace(" ", "&nbsp;"));
         return value;
     },
 
