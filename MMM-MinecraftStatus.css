@@ -7,6 +7,7 @@
  */
 .minecraftStatus {
   max-width: 370px;
+  font-size: 20px;
 }
 
 /*
@@ -19,6 +20,8 @@
   background-image: url('/modules/MMM-MinecraftStatus/public/minecraft-pattern.jpg');
   padding-left: 16px;
   padding-right: 16px;
+  font-size: 26px;
+  line-height: 1.3em;
 }
 
 /*
@@ -27,7 +30,7 @@
  */
 .minecraftStatus table {
   border-collapse: separate;
-  border-spacing: 0 8px;
+  border-spacing: 0 4px;
   width: 100%;
 }
 
@@ -38,7 +41,7 @@
 .minecraftStatus td {
   text-align: center;
   margin: 4px;
-  padding: 6px;
+  padding: 4px;
   line-height: 1em;
 }
 
@@ -47,6 +50,7 @@
   padding-right: 4px;
   text-align: right;
   color: white;
+  font-size: 26px;
   width: 5%;  /* hint to make this as thin as it can */
 }
 
@@ -104,7 +108,7 @@
 .minecraftStatus .errorSection .errorText {
   text-align: left;
   vertical-align: top;
-  font-size: medium;
+  font-size: 18px;
   word-wrap: break-word;
   text-overflow: ellipsis;
   overflow: hidden;
