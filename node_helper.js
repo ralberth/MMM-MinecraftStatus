@@ -7,7 +7,7 @@
  */
 
 var NodeHelper = require("node_helper");
-var mp = require('minecraft-ping');
+var mp = require("minecraft-ping");
 
 
 module.exports = NodeHelper.create({
@@ -39,7 +39,7 @@ module.exports = NodeHelper.create({
         if (notification === "MINECRAFT_PING") {
             //console.log("[MinecraftStatus] MCPinging " + payload.hostname + ":" + payload.port);
             var arg = { host: payload.hostname, port: payload.port };
-            var start_time = new Date();
+            var startTime = new Date();
             var helper = this;
             mp.ping_fe01(arg, function(err, resp) {
                 if (err) {
@@ -48,7 +48,7 @@ module.exports = NodeHelper.create({
                         message: helper.minecraftError2text(err)
                     });
                 } else {
-                    var timeSec = (new Date() - start_time);
+                    var timeSec = (new Date() - startTime);
                     var playerCount = resp.numPlayers ? resp.numPlayers : resp.playersOnline;
                     helper.sendSocketNotification("MINECRAFT_UPDATE", {
                         identifier: payload.identifier,
@@ -74,16 +74,16 @@ module.exports = NodeHelper.create({
      */
     minecraftError2text: function(payload) {
         switch(payload.errno) {
-            case 'ETIMEDOUT':    return "Timed-out contacting Minecraft server";
-            case 'ENOTFOUND':    return "Host " + payload.address + " was not found";
-            case 'ECONNREFUSED': return "Connection refused from " + payload.address + ":" + payload.port;
-            case 'ECONNRESET':   return "Minecraft server closed the connection";
-            case 'EHOSTUNREACH': return payload.address + " is unreachable";
-            case 'ENETUNREACH':  return "Network between here and " + payload.address + " is unreachable";
+        case "ETIMEDOUT":    return "Timed-out contacting Minecraft server";
+        case "ENOTFOUND":    return "Host " + payload.address + " was not found";
+        case "ECONNREFUSED": return "Connection refused from " + payload.address + ":" + payload.port;
+        case "ECONNRESET":   return "Minecraft server closed the connection";
+        case "EHOSTUNREACH": return payload.address + " is unreachable";
+        case "ENETUNREACH":  return "Network between here and " + payload.address + " is unreachable";
 
-            default:
-                // not a known type, grab generic message from the Error object
-                return payload.message;
+        default:
+            // not a known type, grab generic message from the Error object
+            return payload.message;
         }
     }
 });

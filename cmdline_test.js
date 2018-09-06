@@ -17,15 +17,15 @@
  *             maxPlayers: 10
  *         }
  */
-var mcp = require('minecraft-ping');
+var mcp = require("minecraft-ping");
 
 console.log("MSPinging " + process.argv[2] + ":" + process.argv[3]);
 mcp.ping_fe01({
-        host: process.argv[2],
-        port: process.argv[3]
-    },
-    function(err, response) {
-        console.log("Results:");
-        console.log("   Error = " + JSON.stringify(err, null, 2));
-        console.log("   Data  = " + JSON.stringify(response, null, 2));
-    });
+    host: process.argv[2],
+    port: process.argv[3]
+},
+function(err, response) {
+    console.log("Results:");
+    console.log("   Error = " + JSON.stringify(err, null, 2));
+    console.log("   Data  = " + JSON.stringify(response, null, 2));
+});

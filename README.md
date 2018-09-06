@@ -165,7 +165,7 @@ These sounds are works by other people, and do not imply or include any warranti
 | --- | --- | --- |
 | [alarm-1.mp3](https://freesound.org/people/jobro/sounds/244113/) | [jobro](https://freesound.org/people/jobro) | Converted from ogg to mp3 format |
 | [alert-sound.mp3](https://freesound.org/people/philitup321/sounds/204369/) | [philitup321](https://freesound.org/people/philitup321) | Converted from ogg to mp3 format |
-| [complete-chime.mp3](https://freesound.org/people/FoolBoyMedia/sounds/352661/) | [FoolBoyMedia] (https://freesound.org/people/FoolBoyMedia) | |
+| [complete-chime.mp3](https://freesound.org/people/FoolBoyMedia/sounds/352661/) | [FoolBoyMedia](https://freesound.org/people/FoolBoyMedia) | |
 | [doorbell-notification.mp3](https://freesound.org/people/TheBuilder15/sounds/415763/) | [TheBuilder15](https://freesound.org/people/TheBuilder15) | Converted from wav to mp3 format |
 | [level-up.mp3](https://freesound.org/people/rhodesmas/sounds/320655/) | [rhodesmas](https://freesound.org/people/rhodesmas) | Converted from wav to mp3 format |
 | [notification-2.mp3](https://freesound.org/people/ebcrosby/sounds/332651/) | [ebcrosby](https://freesound.org/people/ebcrosby) | Converted from wav to mp3 format |

@@ -1,6 +1,3 @@
--webkit-scrollbar {
-	display: none;
-}
 /*
  * Specific styling used only by IDs and classes from MMM-MinecraftStatus.js
  */
@@ -9,7 +6,7 @@
  * Set a max so error messages will word-wrap.
  */
 .minecraftStatus {
-    max-width: 370px;
+  max-width: 370px;
 }
 
 /*
@@ -18,10 +15,10 @@
  * Padding makes it look like it has the same border all the way around.
  */
 .minecraftStatus div.title {
-    color: #D0D0D0;
-    background-image: url('/modules/MMM-MinecraftStatus/public/minecraft-pattern.jpg');
-    padding-left:  16px;
-    padding-right: 16px;
+  color: #d0d0d0;
+  background-image: url('/modules/MMM-MinecraftStatus/public/minecraft-pattern.jpg');
+  padding-left: 16px;
+  padding-right: 16px;
 }
 
 /*
@@ -29,43 +26,43 @@
  * the latency sections have some blackspace between them.
  */
 .minecraftStatus table {
-    border-collapse: separate;
-    border-spacing: 0 8px;
+  border-collapse: separate;
+  border-spacing: 0 8px;
 }
 
 .minecraftStatus tr {
-    background-color: #303030;
+  background-color: #303030;
 }
 
 .minecraftStatus td {
-    text-align: center;
-    margin: 4px;
-    padding: 6px;
-    line-height: 1em;
+  text-align: center;
+  margin: 4px;
+  padding: 6px;
+  line-height: 1em;
 }
 
 .minecraftStatus td.value {
-    padding-left: 24px;
-    padding-right: 4px;
-    text-align: right;
-    color: white;
+  padding-left: 24px;
+  padding-right: 4px;
+  text-align: right;
+  color: white;
 }
 
 .minecraftStatus .successSection td.label {
-    vertical-align: bottom;
-    padding-left: 4px;
-    text-align: left;
-    padding-top: 0px;
-    line-height: normal;
-    font-size: small;
-    font-variant: small-caps;
+  vertical-align: bottom;
+  padding-left: 4px;
+  text-align: left;
+  padding-top: 0;
+  line-height: normal;
+  font-size: small;
+  font-variant: small-caps;
 }
 
 /*
  * An Iconbox is the <TD> that holds the FontSwesome images.
  */
 .minecraftStatus .successSection .iconbox {
-    background-color: #4875B4;
+  background-color: #4875b4;
 }
 
 /*
@@ -73,7 +70,7 @@
  * match the fontswesome image.
  */
 .minecraftStatus .iconbox i {
-    color: #E0E0E0;
+  color: #e0e0e0;
 }
 
 /*
@@ -82,27 +79,27 @@
  * the helper.
  */
 .minecraftStatus tbody {
-    display: none;
+  display: none;
 }
 
 .minecraftStatus .errorSection .iconbox {
-    background-color: #C00000;
-    width: 10%;
+  background-color: #c00000;
+  width: 10%;
 }
 
 .minecraftStatus .errorSection .errorLabel {
-    color: #C00000;
-    text-align: left;
-    vertical-align: middle;
-    width: 90%;
-    padding-left: 12px;
+  color: #c00000;
+  text-align: left;
+  vertical-align: middle;
+  width: 90%;
+  padding-left: 12px;
 }
 
 .minecraftStatus .errorSection .errorText {
-    text-align: left;
-    vertical-align: top;
-    font-size: medium;
-    word-wrap: break-word;
-    text-overflow: ellipsis;
-    overflow: hidden;
+  text-align: left;
+  vertical-align: top;
+  font-size: medium;
+  word-wrap: break-word;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

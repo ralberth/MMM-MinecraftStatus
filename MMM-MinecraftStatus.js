@@ -29,7 +29,7 @@ Module.register("MMM-MinecraftStatus", {
 
 
     getStyles: function() {
-        return [ "MMM-MinecraftStatus.css", 'font-awesome.css' ];
+        return [ "MMM-MinecraftStatus.css", "font-awesome.css" ];
     },
 
 
@@ -37,18 +37,18 @@ Module.register("MMM-MinecraftStatus", {
      * Don't hate, these came from Google translate.  If you don't like them, send
      * a pull request on Github, please!
      */
-	getTranslations: function() {
-		return {
+    getTranslations: function() {
+        return {
             cn: "translations/cn.json",
             de: "translations/de.json",
-			en: "translations/en.json",
+            en: "translations/en.json",
             es: "translations/es.json",
-			fr: "translations/fr.json",
+            fr: "translations/fr.json",
             it: "translations/it.json",
             jp: "translations/jp.json",
             ru: "translations/ru.json"
-		};
-	},
+        };
+    },
 
 
     /*
@@ -91,9 +91,8 @@ Module.register("MMM-MinecraftStatus", {
 
     createAudioPlayer: function(parent, audioUri) {
         return this.createEle(parent, "audio", null,
-                       '<source type="audio/mpeg" src="/modules/MMM-MinecraftStatus/public/sounds/' + audioUri + '"/>' +
-                       '(' + this.translate("no_audio_support") + ')' +
-                       '</audio>');
+            "<source type='audio/mpeg' src='/modules/MMM-MinecraftStatus/public/sounds/" +
+            audioUri + "'/>" + "(" + this.translate("no_audio_support") + ")</audio>");
     },
 
 
@@ -104,7 +103,7 @@ Module.register("MMM-MinecraftStatus", {
     createMetricPanel: function(parent, fontAwesomeName, label) {
         var row = this.createEle(parent, "tr");
         this.createEle(row, "td", "iconbox",
-                       "<i class='fa fa-" + fontAwesomeName + " fa-fw'></i>");
+            "<i class='fa fa-" + fontAwesomeName + " fa-fw'></i>");
 
         var value = this.createEle(row, "td", "value", "?");
         this.createEle(row, "td", "label", label);
@@ -115,7 +114,7 @@ Module.register("MMM-MinecraftStatus", {
     createErrorSection: function(parent) {
         var tr1 = this.createEle(parent, "tr");
         this.createEle(tr1, "td", "iconbox",
-                       "<i class='fa fa-exclamation-triangle fa-fw'></i>");
+            "<i class='fa fa-exclamation-triangle fa-fw'></i>");
         this.createEle(tr1, "td", "errorLabel", this.translate("error"));
         var tr2 = this.createEle(parent, "tr");
         return this.createEle(tr2, "td", "errorText");
@@ -128,9 +127,15 @@ Module.register("MMM-MinecraftStatus", {
      */
     createEle: function(parentEle, eleType, name, innerHtml) {
         var div = document.createElement(eleType);
-        if (name)      div.className = name;
-        if (innerHtml) div.innerHTML = innerHtml;
-        if (parentEle) parentEle.appendChild(div);
+        if (name) {
+            div.className = name;
+        }
+        if (innerHtml) {
+            div.innerHTML = innerHtml;
+        }
+        if (parentEle) {
+            parentEle.appendChild(div);
+        }
         return div;
     },
 
@@ -148,10 +153,10 @@ Module.register("MMM-MinecraftStatus", {
      */
     notificationReceived: function(notification, payload, sender) {
         switch(notification) {
-            case "DOM_OBJECTS_CREATED":
-                this.triggerHelper();     // Ask the server-side helper right away
-                this.startTimer();        // wake up every once and a while and try again
-                break;
+        case "DOM_OBJECTS_CREATED":
+            this.triggerHelper();     // Ask the server-side helper right away
+            this.startTimer();        // wake up every once and a while and try again
+            break;
         }
     },
 
@@ -210,36 +215,36 @@ Module.register("MMM-MinecraftStatus", {
         //             JSON.stringify(payload, null, 2));
         if (payload.identifier === this.identifier) {
             switch(notification) {
-                case "MINECRAFT_UPDATE":
-                    var currPlayers = parseInt(payload.players); // just being safe
+            case "MINECRAFT_UPDATE":
+                var currPlayers = parseInt(payload.players); // just being safe
 
-                    this.playersDiv.innerHTML = currPlayers;
-                    this.latencyDiv.innerHTML = payload.latency;
-                    this.successTbody.style.display = "block";
-                    this.errorTbody.style.display = "none";
+                this.playersDiv.innerHTML = currPlayers;
+                this.latencyDiv.innerHTML = payload.latency;
+                this.successTbody.style.display = "block";
+                this.errorTbody.style.display = "none";
 
-                    if (this.audioPlayerFirstPlayer && this.lastPingNumPlayers == 0 && currPlayers > 0) {
-                        this.audioPlayerFirstPlayer.play();
-                    }
+                if (this.audioPlayerFirstPlayer && this.lastPingNumPlayers == 0 && currPlayers > 0) {
+                    this.audioPlayerFirstPlayer.play();
+                }
 
-                    this.lastPingNumPlayers = currPlayers;
-                    break;
+                this.lastPingNumPlayers = currPlayers;
+                break;
 
-                case "MINECRAFT_ERROR":
-                    this.errorText.innerHTML = payload.message;
-                    this.successTbody.style.display = "none";
-                    this.errorTbody.style.display = "block";
+            case "MINECRAFT_ERROR":
+                this.errorText.innerHTML = payload.message;
+                this.successTbody.style.display = "none";
+                this.errorTbody.style.display = "block";
 
-                    this.sendNotification("SHOW_ALERT", { // picked-up by default module "alert"
-                        type: "notification",
-                        title: this.config.banner,
-                        message: payload.message
-                    });
+                this.sendNotification("SHOW_ALERT", { // picked-up by default module "alert"
+                    type: "notification",
+                    title: this.config.banner,
+                    message: payload.message
+                });
 
-                    if (this.audioPlayerPingFailed) {
-                        this.audioPlayerPingFailed.play();
-                    }
-                    break;
+                if (this.audioPlayerPingFailed) {
+                    this.audioPlayerPingFailed.play();
+                }
+                break;
             }
         }
     },
@@ -253,10 +258,10 @@ Module.register("MMM-MinecraftStatus", {
      */
     suspend: function() {
         if (!!this.timer) {
-             clearInterval(this.timer);
-             this.timer = null;
-             //this.mclog("Not watching a server anymore");
-         }
+            clearInterval(this.timer);
+            this.timer = null;
+            //this.mclog("Not watching a server anymore");
+        }
     },
 
 
