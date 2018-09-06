@@ -4,7 +4,8 @@ A [MagicMirror²](https://magicmirror.builders) module to ping a remote Minecraf
 
 Example screen showing two instances of MMM-MinecraftStatus config entries, one for Willowlands, and a second for Aliens:
 
-![Example screen](screenshot.png)
+![Example screen -- success](screenshot-success.png)
+![Example screen -- failure](screenshot-failure.png)
 
 Each entry has two metrics that are periodically updated on a schedule you set in the `config.js` file.  The number of players is retrieved from the server, and the latency is measured as the total round-trip to contact the Minecraft server from the MagicMirror² server.
 
