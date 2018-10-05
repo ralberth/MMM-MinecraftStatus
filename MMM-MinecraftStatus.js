@@ -46,7 +46,8 @@ Module.register("MMM-MinecraftStatus", {
             fr: "translations/fr.json",
             it: "translations/it.json",
             jp: "translations/jp.json",
-            ru: "translations/ru.json"
+            ru: "translations/ru.json",
+            sv: "translations/sv.json"
         };
     },
 
