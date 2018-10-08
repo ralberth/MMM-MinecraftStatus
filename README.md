@@ -134,8 +134,9 @@ MMM-MinecraftStatus is available in the following languages:
 * Italian
 * Simplified Japanese
 * Russian
+* Swedish
 
-The translations were done with Google Translate.  If you are a native speaker and have a better translation, please post a pull request!  I'd love to improve on what defaults I could find.
+The original translations were done by me with Google Translate.  If you are a native speaker and have a better translation, please post a pull request!  I'd love to improve on what defaults I could find.  Big thanks to [el97](https://github.com/el97) for the Swedish translation that wasn't done using Google Translate.
 
 
 ## Known Bugs
